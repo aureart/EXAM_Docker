@@ -6,7 +6,7 @@ api_address = os.getenv('API_ADDRESS', 'localhost')
 # port de l'API
 api_port = os.getenv('API_PORT', 8000) #port sur lequel l'api est disponilble
 log_path = os.getenv('LOG_PATH', None)
-
+#LOG = 1
 
 def run_test(api_address, api_port):
     sentences = ["life is beautiful", "that sucks"]
@@ -55,7 +55,8 @@ def run_test(api_address, api_port):
 
                 print(output)
                 if os.environ.get('LOG') == '1':
-                  with open('api_test.log', 'a') as file:
+                #if(LOG)
+                  with open(log_path, 'a') as file:
                      file.write(output)
 
 if __name__ == "__main__":

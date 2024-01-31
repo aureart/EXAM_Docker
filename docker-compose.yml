@@ -20,7 +20,7 @@ services:
     depends_on:
       - api
     volumes:
-      - log_volume:/logs
+      - log_volume:/app/logs
 
   test_authorization:
     build: 
@@ -34,7 +34,7 @@ services:
     depends_on:
       - api
     volumes:
-      - log_volume:/logs
+      - log_volume:/app/logs
 
   test_content:
     build: 
@@ -48,11 +48,11 @@ services:
     depends_on:
       - api
     volumes:
-      - log_volume:/logs
+      - log_volume:/app/logs
 networks:
   my_network_from_compose:
     name: my_network_from_compose
 
-## volumes dans chaque service ou pas ?
+
 volumes:
   log_volume: # ou /app ? 

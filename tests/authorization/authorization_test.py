@@ -4,7 +4,7 @@ import os
 api_address = os.getenv('API_ADDRESS', 'localhost')
 # port de l'API
 api_port = os.getenv('API_PORT', 8000) #port sur lequel l'api est disponilble
-#log_path = os.getenv('LOG_PATH', None) Définii dns docker-compose
+log_path = os.getenv('LOG_PATH', None) #Définii dns docker-compose
 
 
 def run_authorization_test(api_address, api_port, log_path):
@@ -50,9 +50,9 @@ def run_authorization_test(api_address, api_port, log_path):
             '''
 
             print(output)
-        if log_path:
-            with open(log_path, 'a') as file:
-                file.write(output)
+            if os.environ.get('LOG') == '1':
+                with open(log_path, 'a') as file:
+                    file.write(output)
 
 
 if __name__ == "__main__":

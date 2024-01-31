@@ -7,6 +7,8 @@ import requests
 api_address = os.getenv('API_ADDRESS', 'localhost')
 # port de l'API
 api_port = os.getenv('API_PORT', 8000) #port sur lequel l'api est disponilble
+log_path = os.getenv('LOG_PATH', None) #Définii dns docker-compose
+
 
 def run_test(api_address, api_port):
     #
@@ -40,7 +42,7 @@ def run_test(api_address, api_port):
         # impression dans un fichier
         print(output)
         if os.environ.get('LOG') == '1':
-            with open('api_test.log', 'a') as file:
+            with open(log_path, 'a') as file:
                 file.write(output)
 
 if __name__ == "__main__":
