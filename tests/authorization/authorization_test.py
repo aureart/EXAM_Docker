@@ -18,8 +18,8 @@ def run_authorization_test(api_address, api_port, log_path):
     }
 
     for user, details in users.items():
-        for version in details["versions"]:
-            url = f"http://{api_address}:{api_port}/{version}/sentiment"
+        for version12 in ["v1", "v2"]:
+            url = f"http://{api_address}:{api_port}/{version12}/sentiment"
             params = {
                 "username": details["username"],
                 "password": details["password"],
@@ -29,7 +29,7 @@ def run_authorization_test(api_address, api_port, log_path):
 
             # Déterminez si le test est réussi
             status_code = response.status_code
-            expected_status = 200 if (user != "bob" or version != "v2") else 403
+            expected_status = 200 if (user != "bob" or version12 != "v2") else 403
             test_status = 'SUCCESS' if status_code == expected_status else 'FAILURE'
 
             #expected_status = 200
@@ -40,7 +40,7 @@ def run_authorization_test(api_address, api_port, log_path):
                 Authorization test
             ============================
 
-            request done at "/{version}/sentiment"
+            request done at "/{version12}/sentiment"
             | username="{details["username"]}"
 
             expected result = {expected_status}
