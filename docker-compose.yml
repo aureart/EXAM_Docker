@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  api:
+    image: datascientest/fastapi:1.0.0
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network_from_compose
+
+  test_authentification:
+    build: 
+      context: ./tests/authentification
+      dockerfile: Dockerfile
+    environment:
+      - API_PORT=8000 
+      - LOG_PATH=/logs/api_test.log
+      - LOG=1
+    networks:
+      - my_network_from_compose
+    depends_on:
+      - api
+    volumes:
+      - log_volume:/logs
+
+  test_authorization:
+    build: 
+      context: ./tests/authorization
+      dockerfile: Dockerfile
+    environment:
+      - LOG=1
+      - LOG_PATH=/logs/api_test.log
+    networks:
+      - my_network_from_compose
+    depends_on:
+      - api
+    volumes:
+      - log_volume:/logs
+
+  test_content:
+    build: 
+      context: ./tests/content
+      dockerfile: Dockerfile
+    environment:
+      - LOG=1
+      - LOG_PATH=/logs/api_test.log
+    networks:
+      - my_network_from_compose
+    depends_on:
+      - api
+    volumes:
+      - log_volume:/logs
+networks:
+  my_network_from_compose:
+    name: my_network_from_compose
+
+## volumes dans chaque service ou pas ?
+volumes:
+  log_volume: # ou /app ? 
