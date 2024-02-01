@@ -11,14 +11,10 @@
 # Dockerfile pour le test d'authentification
 FROM python:3.9
 
-# Installer les paquets requis
-#RUN pip3 install requests
+RUN apt-get update && apt-get install python3-pip -y && pip install requests
 
-# Copier le script de test dans l'image
 ADD authentification_test.py /authentification_test.py
 
-# Définir le répertoire de travail
-#WORKDIR /app
+WORKDIR /app
 
-# Commande à exécuter au démarrage du conteneur
 CMD python3 authentification_test.py
