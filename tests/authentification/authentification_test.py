@@ -4,7 +4,7 @@ import requests
 
 
 # définition de l'adresse de l'API
-api_address = os.getenv('API_ADDRESS', 'localhost')
+api_address = os.getenv('API_ADDRESS', 'api')
 # port de l'API
 api_port = os.getenv('API_PORT', 8000) #port sur lequel l'api est disponilble
 log_path = os.getenv('LOG_PATH', None) #Définii dns docker-compose

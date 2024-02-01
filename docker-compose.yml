@@ -1,11 +1,13 @@
 version: "3.9"
 services:
   api:
+    build: .
     image: datascientest/fastapi:1.0.0
+    platform: linux/amd64
     ports:
-      - "8000:8000"
+     - "8000:8000"
     networks:
-      - my_network_from_compose
+     - my_network_from_compose
 
   test_authentification:
     build: 
@@ -27,6 +29,7 @@ services:
       context: ./tests/authorization
       dockerfile: Dockerfile
     environment:
+      - API_PORT=8000 
       - LOG=1
       - LOG_PATH=/logs/api_test.log
     networks:
@@ -41,6 +44,7 @@ services:
       context: ./tests/content
       dockerfile: Dockerfile
     environment:
+      - API_PORT=8000 
       - LOG=1
       - LOG_PATH=/logs/api_test.log
     networks:
