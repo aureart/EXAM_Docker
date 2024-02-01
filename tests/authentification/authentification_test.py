@@ -10,7 +10,7 @@ api_port = os.getenv('API_PORT', 8000) #port sur lequel l'api est disponilble
 log_path = os.getenv('LOG_PATH', None) #Définii dns docker-compose
 
 
-def run_test(api_address, api_port):
+def run_athen_test(api_address, api_port, log_path):
     #
     users = [("alice", "wonderland"), ("bob", "builder"), ("clementine", "mandarine")]
 
@@ -46,4 +46,4 @@ def run_test(api_address, api_port):
                 file.write(output)
 
 if __name__ == "__main__":
-    run_test('localhost', 8000)  # Adjust address and port if needed
+    run_athen_test(api_address, api_port, log_path)  # Adjust address and port if needed

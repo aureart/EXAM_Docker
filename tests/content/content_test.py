@@ -2,13 +2,13 @@ import os
 import requests
 
 # définition de l'adresse de l'API
-api_address = os.getenv('API_ADDRESS', 'localhost')
+api_address = os.getenv('API_ADDRESS', 'api')
 # port de l'API
 api_port = os.getenv('API_PORT', 8000) #port sur lequel l'api est disponilble
 log_path = os.getenv('LOG_PATH', None)
 #LOG = 1
 
-def run_test(api_address, api_port):
+def run_content_test(api_address, api_port, log_path):
     sentences = ["life is beautiful", "that sucks"]
     users = {
         "alice": {"username": "alice", 
@@ -60,4 +60,4 @@ def run_test(api_address, api_port):
                      file.write(output)
 
 if __name__ == "__main__":
-    run_test('localhost', 8000)  # Adjust address and port if needed
+    run_content_test(api_address, api_port, log_path)

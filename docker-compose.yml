@@ -1,8 +1,10 @@
 version: "3.9"
 services:
   api:
-    build: .
-    image: datascientest/fastapi:1.0.0
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    #image: datascientest/fastapi:1.0.0
     platform: linux/amd64
     ports:
      - "8000:8000"
@@ -14,6 +16,7 @@ services:
       context: ./tests/authentification
       dockerfile: Dockerfile
     environment:
+      - API_ADDRESS=api
       - API_PORT=8000 
       - LOG_PATH=/logs/api_test.log
       - LOG=1
@@ -22,13 +25,14 @@ services:
     depends_on:
       - api
     volumes:
-      - log_volume:/app/logs
+      - log_volume:/logs
 
   test_authorization:
     build: 
       context: ./tests/authorization
       dockerfile: Dockerfile
     environment:
+      - API_ADDRESS=api
       - API_PORT=8000 
       - LOG=1
       - LOG_PATH=/logs/api_test.log
@@ -37,13 +41,14 @@ services:
     depends_on:
       - api
     volumes:
-      - log_volume:/app/logs
+      - log_volume:/logs
 
   test_content:
     build: 
       context: ./tests/content
       dockerfile: Dockerfile
     environment:
+      - API_ADDRESS=api
       - API_PORT=8000 
       - LOG=1
       - LOG_PATH=/logs/api_test.log
@@ -52,7 +57,7 @@ services:
     depends_on:
       - api
     volumes:
-      - log_volume:/app/logs
+      - log_volume:/logs
 networks:
   my_network_from_compose:
     name: my_network_from_compose
