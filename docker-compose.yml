@@ -55,9 +55,4 @@ networks:
 
 
 volumes:
-  log_volume: # ou /app ? 
-    driver: local
-    driver_opts:
-      type: none
-      device: /logs
-      o: bind
+  log_volume: 
